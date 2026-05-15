@@ -18,7 +18,11 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response && error.response.status === 401) {
+    const isAuthPageRequest = ['/auth/login', '/auth/register'].some((path) =>
+      error.config?.url?.includes(path)
+    );
+
+    if (error.response && error.response.status === 401 && !isAuthPageRequest) {
       localStorage.removeItem('scms_token');
       localStorage.removeItem('scms_user');
       window.location.href = '/login';
