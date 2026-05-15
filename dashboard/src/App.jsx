@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { SnackbarProvider } from './context/SnackbarContext';
 import ProtectedRoute from './components/auth/ProtectedRoute';
@@ -56,12 +56,23 @@ function AppRoutes() {
   );
 }
 
+function AppVisualLayer() {
+  const location = useLocation();
+  const isAuthPage = location.pathname === '/login' || location.pathname === '/register';
+
+  return (
+    <>
+      <CustomCursor />
+      <ParticleCanvas />
+      {!isAuthPage && <GlobalShapes />}
+    </>
+  );
+}
+
 export default function App() {
   return (
     <BrowserRouter>
-      <CustomCursor />
-      <GlobalShapes />
-      <ParticleCanvas />
+      <AppVisualLayer />
       <AuthProvider>
         <SnackbarProvider>
           <AppRoutes />

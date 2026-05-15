@@ -61,27 +61,28 @@ export default function RegisterPage() {
   return (
     <Box sx={{
       minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center',
-      bgcolor: 'background.default', position: 'relative', overflow: 'hidden',
+      bgcolor: actualMode === 'dark' ? '#0a0e17' : '#e9edf5',
+      position: 'relative', overflow: 'hidden',
     }}>
       {/* Campus Background */}
       <Box sx={{
         position: 'absolute', inset: 0,
         backgroundImage: 'url(/images/pattern_bg.png)',
         backgroundSize: 'cover', backgroundPosition: 'center',
-        opacity: actualMode === 'dark' ? 0.08 : 0.03, zIndex: 0,
+        opacity: actualMode === 'dark' ? 0.12 : 0.18, zIndex: 0,
       }} />
       <Box sx={{
         position: 'absolute', inset: 0,
         background: actualMode === 'dark'
-          ? 'radial-gradient(ellipse at top, rgba(16,185,129,0.06) 0%, transparent 60%)'
-          : 'radial-gradient(ellipse at top, rgba(16,185,129,0.04) 0%, transparent 60%)',
+          ? 'radial-gradient(ellipse at top, rgba(16,185,129,0.1) 0%, rgba(10,14,23,0.45) 64%)'
+          : 'radial-gradient(ellipse at top, rgba(255,255,255,0.08) 0%, rgba(233,237,245,0.5) 64%)',
         zIndex: 0,
       }} />
 
       <Card sx={{ 
         width: 520, 
-        bgcolor: actualMode === 'dark' ? 'rgba(17,24,39,0.8)' : 'rgba(255,255,255,0.8)', 
-        backdropFilter: 'blur(20px)', 
+        bgcolor: actualMode === 'dark' ? 'rgba(17,24,39,0.86)' : 'rgba(255,255,255,0.94)', 
+        backdropFilter: 'blur(14px)', 
         border: '1px solid',
         borderColor: 'divider', 
         position: 'relative', 
