@@ -1,0 +1,38 @@
+/* Dashboard global overrides - minimal since MUI handles most styling */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Outfit', 'Inter', -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Global background floating shapes */
+.global-bg-shapes { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 1; }
+
+.global-bg-shapes .shape {
+  position: absolute; border-radius: 50%;
+  filter: blur(80px); opacity: 0.12;
+  animation: floatShape 20s ease-in-out infinite;
+}
+
+.global-bg-shapes .shape:nth-child(1) {
+  width: 500px; height: 500px; background: #6366f1;
+  top: -150px; right: -100px; animation-delay: 0s;
+}
+
+.global-bg-shapes .shape:nth-child(2) {
+  width: 400px; height: 400px; background: #8b5cf6;
+  bottom: -100px; left: -100px; animation-delay: -7s;
+}
+
+.global-bg-shapes .shape:nth-child(3) {
+  width: 350px; height: 350px; background: #10b981;
+  top: 40%; left: 40%; animation-delay: -14s;
+}
+
+@keyframes floatShape {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(40px, -40px) scale(1.1); }
+  66% { transform: translate(-30px, 30px) scale(0.9); }
+}

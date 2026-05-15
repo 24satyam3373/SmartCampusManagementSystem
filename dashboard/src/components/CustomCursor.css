@@ -1,0 +1,52 @@
+@media (pointer: fine) {
+  body, a, button, [role="button"], .MuiButtonBase-root {
+    cursor: none !important;
+  }
+  
+  input, textarea, select {
+    cursor: text !important;
+  }
+}
+
+.custom-cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  background-color: var(--mui-palette-primary-main, #1976d2);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.2s ease-out, background-color 0.2s ease-out, opacity 0.3s ease;
+  opacity: 0;
+}
+
+.custom-cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 32px;
+  height: 32px;
+  border: 2px solid var(--mui-palette-primary-main, #1976d2);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s ease-out, height 0.2s ease-out, background-color 0.2s ease-out, border-color 0.2s ease-out, opacity 0.3s ease;
+  opacity: 0;
+  box-shadow: 0 0 10px rgba(25, 118, 210, 0.3);
+}
+
+.custom-cursor-dot.active {
+  transform: translate(-50%, -50%) scale(0.5);
+}
+
+.custom-cursor-ring.active {
+  width: 48px;
+  height: 48px;
+  background-color: rgba(25, 118, 210, 0.1);
+  border-color: var(--mui-palette-primary-main, #1976d2);
+  box-shadow: 0 0 20px rgba(25, 118, 210, 0.4);
+}
