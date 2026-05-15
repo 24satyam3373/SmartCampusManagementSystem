@@ -1,5 +1,6 @@
-import { createContext, useContext, useState, useEffect, useMemo } from 'react';
-import { ThemeProvider, createTheme, useMediaQuery } from '@mui/material';
+import { createContext, useContext, useState, useMemo } from 'react';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import getThemeConfig from '../theme';
 
 const ThemeContext = createContext();
@@ -13,9 +14,12 @@ export const useThemeMode = () => {
 };
 
 export const ThemeContextProvider = ({ children }) => {
+  const ALLOWED_MODES = ['light', 'dark', 'system'];
+
   // Get initial theme from localStorage or default to 'system'
   const [mode, setMode] = useState(() => {
-    return localStorage.getItem('themeMode') || 'system';
+    const savedMode = localStorage.getItem('themeMode');
+    return ALLOWED_MODES.includes(savedMode) ? savedMode : 'system';
   });
 
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
@@ -31,8 +35,9 @@ export const ThemeContextProvider = ({ children }) => {
   const theme = useMemo(() => createTheme(getThemeConfig(actualMode)), [actualMode]);
 
   const toggleTheme = (newMode) => {
-    setMode(newMode);
-    localStorage.setItem('themeMode', newMode);
+    const safeMode = ALLOWED_MODES.includes(newMode) ? newMode : 'system';
+    setMode(safeMode);
+    localStorage.setItem('themeMode', safeMode);
   };
 
   return (

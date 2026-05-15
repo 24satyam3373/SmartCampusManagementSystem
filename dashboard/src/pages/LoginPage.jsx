@@ -11,7 +11,7 @@ export default function LoginPage() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const { login } = useAuth();
-  const { mode } = useThemeMode();
+  const { actualMode } = useThemeMode();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -19,7 +19,7 @@ export default function LoginPage() {
     setError('');
     setLoading(true);
     try {
-      await login(email, password);
+      await login(email.trim(), password);
       navigate('/');
     } catch (err) {
       setError(err.response?.data?.message || 'Login failed');
@@ -40,11 +40,11 @@ export default function LoginPage() {
         position: 'absolute', inset: 0,
         backgroundImage: 'url(/images/campus_hero.png)',
         backgroundSize: 'cover', backgroundPosition: 'center',
-        opacity: mode === 'dark' ? 0.12 : 0.05, zIndex: 0,
+        opacity: actualMode === 'dark' ? 0.12 : 0.05, zIndex: 0,
       }} />
       <Box sx={{
         position: 'absolute', inset: 0,
-        background: mode === 'dark' 
+        background: actualMode === 'dark' 
           ? 'radial-gradient(ellipse at center, rgba(99,102,241,0.08) 0%, transparent 70%)'
           : 'radial-gradient(ellipse at center, rgba(99,102,241,0.05) 0%, transparent 70%)',
         zIndex: 0,
@@ -52,13 +52,13 @@ export default function LoginPage() {
 
       <Card sx={{ 
         width: 420, 
-        bgcolor: mode === 'dark' ? 'rgba(17,24,39,0.8)' : 'rgba(255,255,255,0.8)', 
+        bgcolor: actualMode === 'dark' ? 'rgba(17,24,39,0.8)' : 'rgba(255,255,255,0.8)', 
         backdropFilter: 'blur(20px)', 
         border: '1px solid',
         borderColor: 'divider', 
         position: 'relative', 
         zIndex: 2,
-        boxShadow: mode === 'dark' ? 'none' : '0 20px 40px rgba(0,0,0,0.1)'
+        boxShadow: actualMode === 'dark' ? 'none' : '0 20px 40px rgba(0,0,0,0.1)'
       }}>
         <CardContent sx={{ p: 4 }}>
           <Box sx={{ textAlign: 'center', mb: 4 }}>

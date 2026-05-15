@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, Link as RouterLink } from 'react-router-dom';
 import api from '../services/api';
+import { useThemeMode } from '../context/ThemeContext';
 import {
   Box, Card, CardContent, TextField, Button, Typography, Alert,
   CircularProgress, Grid, ToggleButton, ToggleButtonGroup,
@@ -16,7 +17,7 @@ export default function RegisterPage() {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
-  const { mode } = useThemeMode();
+  const { actualMode } = useThemeMode();
   const navigate = useNavigate();
 
   const handleChange = (field) => (e) => setForm({ ...form, [field]: e.target.value });
@@ -67,11 +68,11 @@ export default function RegisterPage() {
         position: 'absolute', inset: 0,
         backgroundImage: 'url(/images/pattern_bg.png)',
         backgroundSize: 'cover', backgroundPosition: 'center',
-        opacity: mode === 'dark' ? 0.08 : 0.03, zIndex: 0,
+        opacity: actualMode === 'dark' ? 0.08 : 0.03, zIndex: 0,
       }} />
       <Box sx={{
         position: 'absolute', inset: 0,
-        background: mode === 'dark'
+        background: actualMode === 'dark'
           ? 'radial-gradient(ellipse at top, rgba(16,185,129,0.06) 0%, transparent 60%)'
           : 'radial-gradient(ellipse at top, rgba(16,185,129,0.04) 0%, transparent 60%)',
         zIndex: 0,
@@ -79,13 +80,13 @@ export default function RegisterPage() {
 
       <Card sx={{ 
         width: 520, 
-        bgcolor: mode === 'dark' ? 'rgba(17,24,39,0.8)' : 'rgba(255,255,255,0.8)', 
+        bgcolor: actualMode === 'dark' ? 'rgba(17,24,39,0.8)' : 'rgba(255,255,255,0.8)', 
         backdropFilter: 'blur(20px)', 
         border: '1px solid',
         borderColor: 'divider', 
         position: 'relative', 
         zIndex: 1,
-        boxShadow: mode === 'dark' ? 'none' : '0 20px 50px rgba(0,0,0,0.1)'
+        boxShadow: actualMode === 'dark' ? 'none' : '0 20px 50px rgba(0,0,0,0.1)'
       }}>
         <CardContent sx={{ p: 4 }}>
           <Box sx={{ textAlign: 'center', mb: 3 }}>
